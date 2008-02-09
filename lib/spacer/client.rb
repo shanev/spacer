@@ -19,12 +19,7 @@ module Spacer
     
     def user(user_id)
       response = do_request "users/#{user_id}"
-      @user = User.from_hash(response)
-    end
-    
-    def current_user
-      response = do_request "currentuser"
-      # puts response.inspect
+      @user = User.from_hash_with_client(response, self)
     end
     
     def profile(user_id)
@@ -35,7 +30,7 @@ module Spacer
     def friends(user_id, page=nil, page_size=nil, list=nil)
       response = do_request "users/#{user_id}/friends.#{FORMAT.to_s}?page=#{page}&page_size=#{page_size}&list=#{list}"
       @friends = response['friends'].map do |friend|
-        User.from_hash(friend)
+        User.from_hash_with_client(friend, self)
       end
     end
     
@@ -114,6 +109,13 @@ module Spacer
         end
       else
         response['friendship'].first['areFriends']
+      end
+    end
+    
+    def groups(user_id)
+      response = do_request "users/#{user_id}/groups"
+      @groups = response['Groups'].map do |group|
+        Group.from_hash(group)
       end
     end
   

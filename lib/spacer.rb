@@ -7,6 +7,7 @@ unless defined? Spacer
 require 'rubygems'
 require 'oauth/consumer'
 require 'activesupport'
+require 'spacer/model'
 
 module Spacer
 
@@ -48,7 +49,9 @@ module Spacer
     search_me = ::File.expand_path(
         ::File.join(::File.dirname(fname), dir, '**', '*.rb'))
 
-    Dir.glob(search_me).sort.each {|rb| require rb}
+    Dir.glob(search_me).sort.each do |rb|
+      require rb
+    end
   end
 
 end  # module Spacer

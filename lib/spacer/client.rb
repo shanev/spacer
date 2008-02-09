@@ -45,6 +45,18 @@ module Spacer
         Album.from_hash(album)
       end
     end
+    
+    def album(user_id, album_id)
+      response = do_request "users/#{user_id}/albums/#{album_id}"
+      @album = Album.from_hash(response)
+    end
+    
+    def photos_for_album(user_id, album_id)
+      response = do_request "users/#{user_id}/albums/#{album_id}/photos"
+      @photos = response['photos'].map do |photo|
+        Photo.from_hash(photo)
+      end
+    end
   
   private 
     def do_request(query)

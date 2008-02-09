@@ -1,3 +1,4 @@
+## Graciously stolen from Facebooker
 #
 # Copyright (c) 2007 Chad Fowler <chad@infoether.com>
 # 
@@ -23,14 +24,10 @@ module Spacer
   # helper methods primarily supporting the management of Ruby objects which are populatable via Hashes.  
   # Since most Facebook API calls accept and return hashes of data (as XML), the Model module allows us to
   # directly populate a model's attributes given a Hash with matching key names.
-  #
-  ## Graciously stolen from Facebooker
   module Model
     class UnboundSessionException < Exception; end
     def self.included(includer)
       includer.extend ClassMethods
-      includer.__send__(:attr_writer, :session)
-      includer.__send__(:attr_reader, :anonymous_fields)
     end
     module ClassMethods
       ##
@@ -99,19 +96,6 @@ module Spacer
           end)
         end
       end      
-    end
-    
-    ##
-    # Centralized, error-checked place for a model to get the session to which it is bound.
-    # Any Facebook API queries require a Session instance.
-    def session
-      @session || (raise UnboundSessionException, "Must bind this object to a Facebook session before querying")
-    end
-    
-    # 
-    # This gets populated from FQL queries.
-    def anon=(value)
-      @anonymous_fields = value
     end
     
     def initialize(hash = {})

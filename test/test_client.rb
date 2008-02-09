@@ -4,7 +4,7 @@ require File.join(File.dirname(__FILE__), %w[test_helper])
 require 'test/unit'
 require 'mocha'
 
-class ClientTest < Test::Unit::TestCase
+class TestClient < Test::Unit::TestCase
   
   STUB_NETWORK = true
   
@@ -36,12 +36,29 @@ class ClientTest < Test::Unit::TestCase
     end
   end
   
-  # def test_get_albums
-  #   stub_http_response_with( example_albums_response_json )
-  #   friends = @myspace.albums('107265345')
-  #   assert_equal 4, albums.size
-  #   assert_equal 'bike', albums.first.name    
-  # end
+  def test_get_albums
+    stubbing_http_response_with example_albums_response_json do
+      albums = @myspace.albums('107265345')
+      assert_equal 1, albums.size
+      assert_equal 'My Photos', albums.first.title
+      assert_equal 1580520, albums.first.id
+    end
+  end
+  
+  def test_get_album_by_id
+    stubbing_http_response_with example_album_by_id_response_json do
+      album = @myspace.album('107265345', 1580520)
+      assert_equal 'My Photos', album.title
+      assert_equal 1580520, album.id
+    end      
+  end
+  
+  def test_get_photos_by_album_id
+    stubbing_http_response_with example_photos_for_album_response_json do
+      photos = @myspace.photos_for_album('107265345', 1580520)
+      assert_equal '', photos.first.caption
+    end
+  end
   
   # def test_get_current_user
   #   @myspace.current_user
@@ -62,6 +79,14 @@ private
   
   def example_albums_response_json
     '{"albums":[{"__type":"Album:#MySpace.Services.DataContracts","albumUri":"http:\/\/api.msappspace.com\/v1\/users\/107265345\/albums\/1580520","defaultImage":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/m_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","id":1580520,"location":"","photoCount":1,"photosUri":"http:\/\/api.msappspace.com\/v1\/users\/107265345\/albums\/1580520\/photos","privacy":"Everyone","title":"My Photos","user":{"__type":"User:#MySpace.Services.DataContracts","image":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/s_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","name":"BrownPunk!","onlineNow":false,"uri":"http:\/\/api.msappspace.com\/v1\/users\/107265345","userId":107265345,"userType":"Band","webUri":"http:\/\/www.myspace.com\/107265345"}}],"count":1,"next":null,"prev":null,"user":{"__type":"User:#MySpace.Services.DataContracts","image":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/s_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","name":"BrownPunk!","onlineNow":false,"uri":"http:\/\/api.msappspace.com\/v1\/users\/107265345","userId":107265345,"userType":"Band","webUri":"http:\/\/www.myspace.com\/107265345"}}'
+  end
+  
+  def example_album_by_id_response_json
+    '{"albumUri":"http:\/\/api.msappspace.com\/v1\/users\/107265345\/albums\/1580520","defaultImage":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/m_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","id":1580520,"location":"","photoCount":1,"photosUri":"http:\/\/api.msappspace.com\/v1\/users\/107265345\/albums\/1580520\/photos","privacy":"Everyone","title":"My Photos","user":{"__type":"User:#MySpace.Services.DataContracts","image":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/s_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","name":"BrownPunk!","onlineNow":false,"uri":"http:\/\/api.msappspace.com\/v1\/users\/107265345","userId":107265345,"userType":"Band","webUri":"http:\/\/www.myspace.com\/107265345"}}'
+  end
+  
+  def example_photos_for_album_response_json
+    '{"count":1,"next":null,"photos":[{"__type":"Photo:#MySpace.Services.DataContracts","caption":"","id":19071328,"imageUri":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/l_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","photoUri":"http:\/\/api.msappspace.com\/v1\/users\/107265345\/albums\/1580520\/photos\/19071328","user":{"__type":"User:#MySpace.Services.DataContracts","image":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/s_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","name":"BrownPunk!","onlineNow":false,"uri":"http:\/\/api.msappspace.com\/v1\/users\/107265345","userId":107265345,"userType":"Band","webUri":"http:\/\/www.myspace.com\/107265345"}}],"prev":null,"user":{"__type":"User:#MySpace.Services.DataContracts","image":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/s_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","name":"BrownPunk!","onlineNow":false,"uri":"http:\/\/api.msappspace.com\/v1\/users\/107265345","userId":107265345,"userType":"Band","webUri":"http:\/\/www.myspace.com\/107265345"}}'
   end
 
   def stubbing_http_response_with(xml_or_json_response)

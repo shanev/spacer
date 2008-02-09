@@ -1,5 +1,6 @@
 module Spacer
   class Album
-    attr_accessor :name
+    include Model
+    attr_accessor :user, :photosUri, :photoCount, :albumUri, :title, :id, :privacy, :defaultImage, :__type, :location
   end
 end

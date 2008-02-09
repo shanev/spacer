@@ -57,6 +57,18 @@ module Spacer
         Photo.from_hash(photo)
       end
     end
+    
+    def photos(user_id)
+      response = do_request "users/#{user_id}/photos"
+      @photos = response['photos'].map do |photo|
+        Photo.from_hash(photo)
+      end      
+    end
+    
+    def interests(user_id)
+      response = do_request "users/#{user_id}/interests"
+      @interests = Interest.from_hash(response)
+    end
   
   private 
     def do_request(query)

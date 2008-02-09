@@ -74,6 +74,13 @@ class TestClient < Test::Unit::TestCase
     end
   end
   
+  def test_get_details
+    stubbing_http_response_with example_details_response_json do
+      details = @myspace.details(107265345)
+      assert_equal 'Single', details.status # <--- see ladies!!!
+    end
+  end
+  
   # def test_get_current_user
   #   @myspace.current_user
   # end
@@ -109,6 +116,10 @@ private
   
   def example_interests_response_json
     '{"books":"","general":"","heroes":"Stewart Copeland","movies":"","music":"","television":"","user":{"__type":"User:#MySpace.Services.DataContracts","image":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/s_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","name":"BrownPunk!","onlineNow":false,"uri":"http:\/\/api.msappspace.com\/v1\/users\/107265345","userId":107265345,"userType":"Band","webUri":"http:\/\/www.myspace.com\/107265345"}}'
+  end
+  
+  def example_details_response_json
+    '{"bodyType":"No Answer","children":"No Answer","drink":"No Answer","education":"No Answer","ethnicity":"No Answer","herefor":"Friends","hometown":"","income":"No Answer","orientation":"No Answer","religion":"No Answer","smoke":"No Answer","status":"Single","user":{"__type":"User:#MySpace.Services.DataContracts","image":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/s_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","name":"BrownPunk!","onlineNow":false,"uri":"http:\/\/api.msappspace.com\/v1\/users\/107265345","userId":107265345,"userType":"Band","webUri":"http:\/\/www.myspace.com\/107265345"},"zodiacsign":null}'
   end
 
   def stubbing_http_response_with(xml_or_json_response)

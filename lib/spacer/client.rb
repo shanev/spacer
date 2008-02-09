@@ -69,6 +69,11 @@ module Spacer
       response = do_request "users/#{user_id}/interests"
       @interests = Interest.from_hash(response)
     end
+    
+    def details(user_id)
+      response = do_request "users/#{user_id}/details"
+      @details = Details.from_hash(response)
+    end
   
   private 
     def do_request(query)

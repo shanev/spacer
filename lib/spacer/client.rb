@@ -1,14 +1,20 @@
 module Spacer
   class Client
     
-    SERVER = 'api.msappspace.com'
-    VERSION = 'v1'
-    FORMAT = :json
+    SERVER    = 'api.msappspace.com'
+    VERSION   = 'v1'
+    FORMAT    = :json
+    LOG_LEVEL = Logger::INFO
     
-    def initialize(api_key, secret_key)
+    def initialize(api_key, secret_key, logger=nil)
       @auth = Authentication.new(api_key, secret_key)
-      @log = Logger.new(STDOUT)
-      @log.level = Logger::INFO
+      
+      if logger
+        @log = logger
+      else
+        @log = Logger.new(STDOUT)
+        @log.level = LOG_LEVEL
+      end
     end
     
     def user(user_id)

@@ -1,12 +1,12 @@
 # $Id$
 
+STUB_NETWORK = true
+
 require File.join(File.dirname(__FILE__), %w[test_helper])
 require 'test/unit'
 require 'mocha'
 
 class TestUser < Test::Unit::TestCase
-  
-  STUB_NETWORK = true
   
   def setup
     api_key = 'http://www.myspace.com/yourapp'

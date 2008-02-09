@@ -118,6 +118,21 @@ class TestClient < Test::Unit::TestCase
       assert_equal 'none', mood.mood
     end            
   end
+  
+  def test_get_friendship_for_one_person
+    stubbing_http_response_with example_friendship_response_for_one_friend_json do
+      friendship = @myspace.friendship?(107265345, 107265345)
+      assert_equal true, friendship
+    end                
+  end
+
+  def test_get_friendship_for_multiple_people
+    stubbing_http_response_with example_friendship_response_for_multiple_friends_json do
+      friendships = @myspace.friendship?(107265345, [107265345, 107265346])
+      assert_equal true, friendships.first
+      assert_equal false, friendships.last
+    end                
+  end
 
   # def test_get_current_user
   #   @myspace.current_user
@@ -178,6 +193,14 @@ private
   
   def example_mood_response_json
     '{"mood":"none","user":{"__type":"User:#MySpace.Services.DataContracts","image":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/s_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","name":"BrownPunk!","onlineNow":false,"uri":"http:\/\/api.msappspace.com\/v1\/users\/107265345","userId":107265345,"userType":"Band","webUri":"http:\/\/www.myspace.com\/107265345"}}'
+  end
+  
+  def example_friendship_response_for_one_friend_json
+    '{"friendship":[{"areFriends":true,"friendId":107265345}],"user":{"__type":"User:#MySpace.Services.DataContracts","image":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/s_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","name":"BrownPunk!","onlineNow":false,"uri":"http:\/\/api.msappspace.com\/v1\/users\/107265345","userId":107265345,"userType":"Band","webUri":"http:\/\/www.myspace.com\/107265345"}}'
+  end
+  
+  def example_friendship_response_for_multiple_friends_json
+    '{"friendship":[{"areFriends":true,"friendId":107265345},{"areFriends":false,"friendId":107265346}],"user":{"__type":"User:#MySpace.Services.DataContracts","image":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/s_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","name":"BrownPunk!","onlineNow":false,"uri":"http:\/\/api.msappspace.com\/v1\/users\/107265345","userId":107265345,"userType":"Band","webUri":"http:\/\/www.myspace.com\/107265345"}}'
   end
 
   def stubbing_http_response_with(xml_or_json_response)

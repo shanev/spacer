@@ -101,6 +101,21 @@ module Spacer
       response = do_request "users/#{user_id}/mood"
       @mood = Mood.from_hash(response)      
     end
+    
+    def friendship?(user_id, friend_ids)
+      multiple_friends = friend_ids.is_a?(Array)
+
+      friend_ids = friend_ids.join(';') if multiple_friends
+      response = do_request "users/#{user_id}/friends/#{friend_ids}"
+      
+      if multiple_friends
+        @friendships = response['friendship'].map do |friendship|
+          friendship['areFriends']
+        end
+      else
+        response['friendship'].first['areFriends']
+      end
+    end
   
   private 
     def do_request(query)

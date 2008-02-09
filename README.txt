@@ -9,6 +9,7 @@ Ruby API for the MySpace Platform REST API
 == FEATURES/PROBLEMS:
 
 * Implements v1.0 of the MySpace Platform REST API
+* Uses JSON for minimal transport footprint
 
 == SYNOPSIS:
 

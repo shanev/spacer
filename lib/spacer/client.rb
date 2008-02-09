@@ -32,6 +32,13 @@ module Spacer
         User.from_hash(friend)
       end
     end
+    
+    def albums(user_id)
+      response = do_request "users/#{user_id}/albums"
+      @albums = response['albums'].map do |album|
+        Album.from_hash(album)
+      end
+    end
   
   private 
     def do_request(query)

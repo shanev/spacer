@@ -64,6 +64,7 @@ class TestClient < Test::Unit::TestCase
     stubbing_http_response_with example_photos_response_json do
       photos = @myspace.photos(107265345)
       assert_equal '', photos.first.caption
+      assert_equal 19071328, photos.first.id
     end
   end
   
@@ -97,6 +98,27 @@ class TestClient < Test::Unit::TestCase
     end    
   end
   
+  def test_get_photo
+    stubbing_http_response_with example_photo_response_json do
+      photo = @myspace.photo(107265345, 19071328)
+      assert_equal 'hi mom', photo.caption
+    end        
+  end
+  
+  def test_get_status
+    stubbing_http_response_with example_status_response_json do
+      status = @myspace.status(107265345)
+      assert_equal 'none', status.status
+    end        
+  end
+  
+  def test_get_mood
+    stubbing_http_response_with example_mood_response_json do
+      mood = @myspace.mood(107265345)
+      assert_equal 'none', mood.mood
+    end            
+  end
+
   # def test_get_current_user
   #   @myspace.current_user
   # end
@@ -144,6 +166,18 @@ private
   
   def example_video_response_json
     '{"country":"US","datecreated":"\/Date(1202587923333-0800)\/","dateupdated":"\/Date(1202587923333-0800)\/","description":"pet","id":27953679,"language":"en","mediastatus":"ProcessingSuccessful","mediatype":"4","privacy":"Public","resourceuserid":"107265345","runtime":"18","thumbnail":"http:\/\/b5.ac-images.myspacecdn.com\/02091\/50\/94\/2091104905_thumb1.jpg","title":"Keechu","totalrating":"0","totalviews":"0","totalvotes":"0","user":{"__type":"User:#MySpace.Services.DataContracts","image":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/s_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","name":"BrownPunk!","onlineNow":false,"uri":"http:\/\/api.msappspace.com\/v1\/users\/107265345","userId":107265345,"userType":"Band","webUri":"http:\/\/www.myspace.com\/107265345"},"videoUri":"http:\/\/api.msappspace.com\/v1\/users\/107265345\/videos\/27953679"}'
+  end
+  
+  def example_photo_response_json
+    '{"caption":"hi mom","id":19071328,"imageUri":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/l_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","photoUri":"http:\/\/api.msappspace.com\/v1\/users\/107265345\/photos\/19071328","user":{"__type":"User:#MySpace.Services.DataContracts","image":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/s_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","name":"BrownPunk!","onlineNow":false,"uri":"http:\/\/api.msappspace.com\/v1\/users\/107265345","userId":107265345,"userType":"Band","webUri":"http:\/\/www.myspace.com\/107265345"}}'
+  end
+  
+  def example_status_response_json
+    '{"status":"none","user":{"__type":"User:#MySpace.Services.DataContracts","image":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/s_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","name":"BrownPunk!","onlineNow":false,"uri":"http:\/\/api.msappspace.com\/v1\/users\/107265345","userId":107265345,"userType":"Band","webUri":"http:\/\/www.myspace.com\/107265345"}}'
+  end
+  
+  def example_mood_response_json
+    '{"mood":"none","user":{"__type":"User:#MySpace.Services.DataContracts","image":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/s_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","name":"BrownPunk!","onlineNow":false,"uri":"http:\/\/api.msappspace.com\/v1\/users\/107265345","userId":107265345,"userType":"Band","webUri":"http:\/\/www.myspace.com\/107265345"}}'
   end
 
   def stubbing_http_response_with(xml_or_json_response)

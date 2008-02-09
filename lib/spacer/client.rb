@@ -86,6 +86,21 @@ module Spacer
       response = do_request "users/#{user_id}/videos/#{video_id}"
       @video = Video.from_hash(response)
     end
+    
+    def photo(user_id, photo_id)
+      response = do_request "users/#{user_id}/photos/#{photo_id}"
+      @photo = Photo.from_hash(response)
+    end
+    
+    def status(user_id)
+      response = do_request "users/#{user_id}/status"
+      @status = Status.from_hash(response)
+    end
+    
+    def mood(user_id)
+      response = do_request "users/#{user_id}/mood"
+      @mood = Mood.from_hash(response)      
+    end
   
   private 
     def do_request(query)

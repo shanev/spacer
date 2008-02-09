@@ -1,32 +1,37 @@
 spacer
-    by FIXME (your name)
-    FIXME (url)
+    by Shane Vitarana
+    http://shanesbrain.net
 
 == DESCRIPTION:
 
-FIXME (describe your package)
+Ruby API for the MySpace Platform REST API
 
 == FEATURES/PROBLEMS:
 
-* FIXME (list of features or problems)
+* Implements v1.0 of the MySpace Platform REST API
 
 == SYNOPSIS:
 
-  FIXME (code sample of usage)
+  @myspace = Spacer::Client.new(api_key, secret_key)
+	user = @myspace.user('3454354')
+	puts user.mood
+	puts user.photos.first.title
 
 == REQUIREMENTS:
 
-* FIXME (list of requirements)
+* OAuth
+* ActiveSupport
+* Mocha (for testing)
 
 == INSTALL:
 
-* FIXME (sudo gem install, anything else)
+* sudo gem install spacer
 
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2008 FIXME (different license?)
+Copyright (c) 2008 Shane Vitarana <shanev@gmail.com>, CrimsonJet LLC
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

@@ -8,8 +8,16 @@ lib/spacer.rb
 lib/spacer/auth.rb
 lib/spacer/client.rb
 lib/spacer/model.rb
-lib/spacer/profile.rb
-lib/spacer/user.rb
+lib/spacer/models/album.rb
+lib/spacer/models/details.rb
+lib/spacer/models/group.rb
+lib/spacer/models/interest.rb
+lib/spacer/models/mood.rb
+lib/spacer/models/photo.rb
+lib/spacer/models/profile.rb
+lib/spacer/models/status.rb
+lib/spacer/models/user.rb
+lib/spacer/models/video.rb
 tasks/annotations.rake
 tasks/doc.rake
 tasks/gem.rake
@@ -23,3 +31,4 @@ tasks/test.rake
 test/test_client.rb
 test/test_helper.rb
 test/test_spacer.rb
+test/test_user.rb

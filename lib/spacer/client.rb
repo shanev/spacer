@@ -81,6 +81,11 @@ module Spacer
         Video.from_hash(video)
       end            
     end
+    
+    def video(user_id, video_id)
+      response = do_request "users/#{user_id}/videos/#{video_id}"
+      @video = Video.from_hash(response)
+    end
   
   private 
     def do_request(query)

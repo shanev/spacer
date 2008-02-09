@@ -85,6 +85,15 @@ class TestClient < Test::Unit::TestCase
     stubbing_http_response_with example_videos_response_json do
       videos = @myspace.videos(107265345)
       assert_equal 'Keechu', videos.first.title
+      assert_equal 27953679, videos.first.id
+    end    
+  end
+  
+  def test_get_videos
+    stubbing_http_response_with example_video_response_json do
+      video = @myspace.video(107265345, 27953679)
+      assert_equal 'Keechu', video.title
+      assert_equal 27953679, video.id
     end    
   end
   
@@ -131,6 +140,10 @@ private
   
   def example_videos_response_json
     '{"count":1,"next":null,"prev":null,"user":{"__type":"User:#MySpace.Services.DataContracts","image":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/s_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","name":"BrownPunk!","onlineNow":false,"uri":"http:\/\/api.msappspace.com\/v1\/users\/107265345","userId":107265345,"userType":"Band","webUri":"http:\/\/www.myspace.com\/107265345"},"videos":[{"__type":"Video:#MySpace.Services.DataContracts","country":"US","datecreated":"\/Date(1202587923333-0800)\/","dateupdated":"\/Date(1202587923333-0800)\/","description":"pet","id":27953679,"language":"en","mediastatus":"WatingForUpload","mediatype":"4","privacy":"Public","resourceuserid":"107265345","runtime":"0","thumbnail":"http:\/\/b5.ac-images.myspacecdn.com\/02091\/50\/94\/2091104905_thumb1.jpg","title":"Keechu","totalrating":"0","totalviews":"0","totalvotes":"0","user":{"__type":"User:#MySpace.Services.DataContracts","image":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/s_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","name":"BrownPunk!","onlineNow":false,"uri":"http:\/\/api.msappspace.com\/v1\/users\/107265345","userId":107265345,"userType":"Band","webUri":"http:\/\/www.myspace.com\/107265345"},"videoUri":"http:\/\/api.msappspace.com\/v1\/users\/107265345\/videos\/27953679"}]}'
+  end
+  
+  def example_video_response_json
+    '{"country":"US","datecreated":"\/Date(1202587923333-0800)\/","dateupdated":"\/Date(1202587923333-0800)\/","description":"pet","id":27953679,"language":"en","mediastatus":"ProcessingSuccessful","mediatype":"4","privacy":"Public","resourceuserid":"107265345","runtime":"18","thumbnail":"http:\/\/b5.ac-images.myspacecdn.com\/02091\/50\/94\/2091104905_thumb1.jpg","title":"Keechu","totalrating":"0","totalviews":"0","totalvotes":"0","user":{"__type":"User:#MySpace.Services.DataContracts","image":"http:\/\/a375.ac-images.myspacecdn.com\/images01\/3\/s_975e32aedf2bd81fbe2bf8d3d6d4674e.jpg","name":"BrownPunk!","onlineNow":false,"uri":"http:\/\/api.msappspace.com\/v1\/users\/107265345","userId":107265345,"userType":"Band","webUri":"http:\/\/www.myspace.com\/107265345"},"videoUri":"http:\/\/api.msappspace.com\/v1\/users\/107265345\/videos\/27953679"}'
   end
 
   def stubbing_http_response_with(xml_or_json_response)

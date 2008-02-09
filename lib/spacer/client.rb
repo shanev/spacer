@@ -74,6 +74,13 @@ module Spacer
       response = do_request "users/#{user_id}/details"
       @details = Details.from_hash(response)
     end
+    
+    def videos(user_id)
+      response = do_request "users/#{user_id}/videos"
+      @videos = response['videos'].map do |video|
+        Video.from_hash(video)
+      end            
+    end
   
   private 
     def do_request(query)

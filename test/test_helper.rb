@@ -4,9 +4,11 @@ require File.expand_path(
     File.join(File.dirname(__FILE__), %w[.. lib spacer]))
 
 def stubbing_http_response_with(xml_or_json_response)
-  if STUB_NETWORK
-    response = stub(:body => xml_or_json_response)
-    Net::HTTP.any_instance.stubs(:request).returns(response)
+  if defined? Spacer::STUB_NETWORK
+    if Spacer::STUB_NETWORK
+      response = stub(:body => xml_or_json_response)
+      Net::HTTP.any_instance.stubs(:request).returns(response)
+    end
   end
   yield
 end

@@ -14,9 +14,9 @@ Ruby API for the MySpace Platform REST API
 == SYNOPSIS:
 
   @myspace = Spacer::Client.new(api_key, secret_key)
-	user = @myspace.user('3454354')
-	puts user.mood
-	puts user.photos.first.title
+  user = @myspace.user('3454354')
+  puts user.interests.music
+  puts user.photos.first.caption
 
 == REQUIREMENTS:
 

@@ -27,8 +27,14 @@ module Spacer
       @profile = Profile.from_hash(response)
     end
     
+    # Optional attributes:
+    #
+    # +page+: (default = 40),
+    # +page_size+: (max size = 3000),
+    # +list+: (:top || :online)
+    #
     def friends(user_id, page=nil, page_size=nil, list=nil)
-      response = do_request "users/#{user_id}/friends.#{FORMAT.to_s}?page=#{page}&page_size=#{page_size}&list=#{list}"
+      response = do_request "users/#{user_id}/friends.#{FORMAT.to_s}?page=#{page}&page_size=#{page_size}&list=#{list.to_s}"
       @friends = response['friends'].map do |friend|
         User.from_hash_with_client(friend, self)
       end

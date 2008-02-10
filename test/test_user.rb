@@ -1,7 +1,5 @@
 # $Id$
 
-STUB_NETWORK = true
-
 require File.join(File.dirname(__FILE__), %w[test_helper])
 require 'test/unit'
 require 'mocha'

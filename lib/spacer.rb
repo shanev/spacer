@@ -11,8 +11,11 @@ require 'spacer/model'
 
 module Spacer
 
+  # Change this to false to run tests over the network and not use stubs
+  STUB_NETWORK = true
+
   # :stopdoc:
-  VERSION = '1.0.0'
+  VERSION = '0.5.0'
   LIBPATH = ::File.expand_path(::File.dirname(__FILE__)) + ::File::SEPARATOR
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR
   # :startdoc:

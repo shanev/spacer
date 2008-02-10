@@ -5,6 +5,8 @@ require 'rake'
 require 'fileutils'
 require 'ostruct'
 
+ENV['VERSION'] = "0.5.0"
+
 PROJ = OpenStruct.new
 
 PROJ.name = nil

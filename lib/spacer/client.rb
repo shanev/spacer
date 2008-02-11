@@ -137,6 +137,8 @@ module Spacer
       response = http.request(request)
       @log.debug "RESPONSE BODY: #{response.body}\n"
       
+      response.value
+      
       ActiveSupport::JSON.decode(response.body)     
     end
     

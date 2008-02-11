@@ -6,7 +6,7 @@ require File.expand_path(
 def stubbing_http_response_with(xml_or_json_response)
   if defined? Spacer::STUB_NETWORK
     if Spacer::STUB_NETWORK
-      response = stub(:body => xml_or_json_response)
+      response = stub(:body => xml_or_json_response, :value => nil)
       Net::HTTP.any_instance.stubs(:request).returns(response)
     end
   end

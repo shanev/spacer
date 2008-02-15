@@ -15,7 +15,7 @@ PROJ.email = 'shanev@gmail.com'
 PROJ.url = 'http://shanesbrain.net'
 PROJ.rubyforge_name = 'spacer'
 PROJ.version = Spacer::VERSION
-PROJ.dependencies = ['oauth']
+PROJ.dependencies = ['oauth', 'json']
 
 PROJ.spec_opts << '--color'
 

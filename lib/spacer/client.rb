@@ -133,13 +133,15 @@ module Spacer
       request = Net::HTTP::Get.new(request_uri.path)
       request = @auth.process_request(http, request)
       @log.debug "REQUEST PATH: #{request.path}"
-      
       response = http.request(request)
       @log.debug "RESPONSE BODY: #{response.body}\n"
-      
       response.value
       
-      ActiveSupport::JSON.decode(response.body)     
+      hash = parse(response.body)     
+    end
+    
+    def parse(json)
+      ActiveSupport::JSON.decode(json)
     end
     
     def request_uri(query)

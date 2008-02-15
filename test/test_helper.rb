@@ -2,6 +2,8 @@
 
 require File.expand_path(
     File.join(File.dirname(__FILE__), %w[.. lib spacer]))
+    
+require 'mocha'
 
 def stubbing_http_response_with(xml_or_json_response)
   if defined? Spacer::STUB_NETWORK

@@ -2,7 +2,6 @@
 
 require File.join(File.dirname(__FILE__), %w[test_helper])
 require 'test/unit'
-require 'mocha'
 
 class TestClient < Test::Unit::TestCase
       

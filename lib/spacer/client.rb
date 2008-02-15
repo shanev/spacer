@@ -141,7 +141,7 @@ module Spacer
     end
     
     def parse(json)
-      ActiveSupport::JSON.decode(json)
+      JSON.parse(json)
     end
     
     def request_uri(query)

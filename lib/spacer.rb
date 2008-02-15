@@ -6,7 +6,8 @@ unless defined? Spacer
 
 require 'rubygems'
 require 'oauth/consumer'
-require 'activesupport'
+require 'json'
+require 'logger'
 require 'spacer/model'
 
 module Spacer
@@ -15,7 +16,7 @@ module Spacer
   STUB_NETWORK = true
 
   # :stopdoc:
-  VERSION = '0.5.0'
+  VERSION = '0.5.1'
   LIBPATH = ::File.expand_path(::File.dirname(__FILE__)) + ::File::SEPARATOR
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR
   # :startdoc:

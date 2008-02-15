@@ -19,6 +19,16 @@ lib/spacer/models/status.rb
 lib/spacer/models/user.rb
 lib/spacer/models/video.rb
 tasks/annotations.rake
+tasks/archive/annotations.rake
+tasks/archive/doc.rake
+tasks/archive/gem.rake
+tasks/archive/manifest.rake
+tasks/archive/post_load.rake
+tasks/archive/rubyforge.rake
+tasks/archive/setup.rb
+tasks/archive/spec.rake
+tasks/archive/svn.rake
+tasks/archive/test.rake
 tasks/doc.rake
 tasks/gem.rake
 tasks/manifest.rake

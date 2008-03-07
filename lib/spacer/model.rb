@@ -1,6 +1,6 @@
 module Spacer
 
-  ## Graciously stolen from Facebooker
+  ## Parts of this module were graciously stolen from Facebooker
   #
   # Copyright (c) 2007 Chad Fowler <chad@infoether.com>
   # 
@@ -26,7 +26,6 @@ module Spacer
   # Since most Facebook API calls accept and return hashes of data (as XML), the Model module allows us to
   # directly populate a model's attributes given a Hash with matching key names.
   module Model
-    class UnboundSessionException < Exception; end
     def self.included(includer)
       includer.extend ClassMethods
     end
@@ -100,6 +99,7 @@ module Spacer
     end
     
     def initialize(hash = {})
+      create_accessors(hash)
       populate_from_hash!(hash)
     end
 
@@ -109,6 +109,14 @@ module Spacer
 
     def populated?
       !@populated.nil?
+    end
+    
+    def create_accessors(hash)
+      unless hash.empty?
+        hash.each do |key, value|
+          self.class.__send__(:attr_accessor, key.to_sym)
+        end
+      end
     end
     
     ##

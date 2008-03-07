@@ -1,6 +1,8 @@
 module Spacer
+  
+  # The following accessors are dynamically generated - 
+  # +user+, +heroes+, +general+, +music+, +television+, +movies+, +books+
   class Interest
     include Model
-    attr_accessor :user, :heroes, :general, :music, :television, :movies, :books
   end
 end

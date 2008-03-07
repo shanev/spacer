@@ -1,7 +1,10 @@
 module Spacer
+
+  # The following accessors are dynamically generated - 
+  # +name+, +uri+, +webUri+, +userType+, +onlineNow+, +image+, +__type+  
   class User
     include Model
-    attr_accessor :name, :uri, :webUri, :userType, :userId, :onlineNow, :image, :__type
+    attr_accessor :userId
     attr_accessor :client
     
     class << self

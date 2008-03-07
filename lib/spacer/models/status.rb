@@ -1,6 +1,8 @@
 module Spacer
+
+  # The following accessors are dynamically generated - 
+  # +user+, +status+  
   class Status
     include Model
-    attr_accessor :user, :status
   end
 end

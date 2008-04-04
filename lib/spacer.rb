@@ -13,7 +13,7 @@ require 'spacer/model'
 module Spacer
 
   # Change this to false to run tests over the network and not use stubs
-  STUB_NETWORK = true
+  STUB_NETWORK = false
 
   # :stopdoc:
   VERSION = '0.5.1'

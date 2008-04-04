@@ -1,7 +1,7 @@
 module Spacer
   class Client
     
-    SERVER    = 'api.msappspace.com'
+    SERVER    = 'api.myspace.com'
     VERSION   = 'v1'
     FORMAT    = :json
     LOG_LEVEL = Logger::INFO

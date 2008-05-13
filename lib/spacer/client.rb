@@ -35,7 +35,7 @@ module Spacer
     #
     def friends(user_id, page=nil, page_size=nil, list=nil)
       response = do_request "users/#{user_id}/friends.#{FORMAT.to_s}?page=#{page}&page_size=#{page_size}&list=#{list.to_s}"
-      @friends = response['friends'].map do |friend|
+      @friends = response['Friends'].map do |friend|
         User.from_hash_with_client(friend, self)
       end
     end

@@ -1,6 +1,7 @@
-== 0.5.2 / 2008-xx-xx
+== 0.5.2 / 2008-05-13
 
-* Dynamically generate model attributes
+* Dynamically generate model attributes [shane]
+* Fixed Myspace changing friends call to Friends [shane]
 
 == 0.5.1 / 2008-02-15
 
